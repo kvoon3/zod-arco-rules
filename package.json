@@ -1,0 +1,80 @@
+{
+  "name": "zod-arco-rules",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.14.3",
+  "description": "arco design vue zod validation",
+  "author": "Kevin Kwong <kvoon@duck.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/kvoon3",
+  "homepage": "https://github.com/kvoon3/zod-arco-rules#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvoon3/zod-arco-rules.git"
+  },
+  "bugs": "https://github.com/kvoon3/zod-arco-rules/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && pnpm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks",
+    "play": "pnpm -r dev"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.11.2",
+    "@antfu/ni": "^0.23.1",
+    "@antfu/utils": "^0.7.10",
+    "@arco-design/web-vue": "^2.56.3",
+    "@types/node": "^22.10.1",
+    "bumpp": "^9.8.1",
+    "eslint": "^9.15.0",
+    "esno": "^4.8.0",
+    "lint-staged": "^15.2.10",
+    "pnpm": "^9.14.3",
+    "simple-git-hooks": "^2.11.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "unbuild": "^2.0.0",
+    "vite": "^6.0.1",
+    "vitest": "^2.1.6",
+    "zod": "^3.24.1"
+  },
+  "resolutions": {
+    "@arco-design/web-vue": "^2.56.3",
+    "unplugin": "^2.1.0",
+    "vite": "^6.0.5"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
