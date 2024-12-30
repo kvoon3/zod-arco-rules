@@ -12,7 +12,6 @@ async function enableMocking() {
   if (!import.meta.env.DEV)
     return
 
-  // @ts-expect-error js module
   return (await import('./mocks/browser'))
     .worker
     .start()
