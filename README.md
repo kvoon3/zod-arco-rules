@@ -10,6 +10,7 @@ arco design vue zod validation
 
 ## Todos
 
+- [ ] valibot support
 - [ ] form validation status
 - [ ] Auto form
 
