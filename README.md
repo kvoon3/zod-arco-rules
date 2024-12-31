@@ -8,10 +8,31 @@
 
 arco design vue zod validation
 
+## Install
+
+```sh
+npm i zod-arco-rules
+```
+
+## Usage
+
+```ts
+import * as z from 'zod'
+import { zodArcoRules } from 'zod-arco-rules'
+
+const { rules, handleSubmit } = zodArcoRules(z.object({
+  name: z.string().nonempty(),
+  post: z.string().min(2).max(30),
+  isRead: z.boolean(),
+}))
+```
+
+- [📖 Check more](./playground/src/App.vue)
+
 ## Todos
 
-- [ ] valibot support
-- [ ] form validation status
+- [ ] Valibot support
+- [ ] a-form validation status
 - [ ] Auto form
 
 ## License
