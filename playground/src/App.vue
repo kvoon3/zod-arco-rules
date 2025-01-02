@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import * as z from 'zod'
+import { useI18n } from 'vue-i18n'
 import { zodArcoRules } from 'zod-arco-rules'
+import { z } from '~/i18n/zod'
+
+const { t } = useI18n()
 
 const schema = z.object({
   name: z.string().min(4).nonempty(),
@@ -35,10 +38,11 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div mxa mt4 rounded container>
-    <h1 mt10 block h1 h15 text-center text-2xl font-semibold leading-loose font-mono>
+  <div mxa mt4 rounded container space-y-4>
+    <header mt10 block text-center text-2xl font-semibold font-mono>
       Zod Arco Rules Playground
-    </h1>
+    </header>
+    <TheNav />
     <main mxa w-150 border rounded p10>
       <a-form
         :model="form"
@@ -47,36 +51,36 @@ const onSubmit = handleSubmit(async (values) => {
         @submit="onSubmit"
       >
         <a-form-item
-          field="name" tooltip="Please enter username" label="Username"
+          field="name" :tooltip="t('form.username.tooltip')" :label="t('form.username.label')"
         >
           <a-input
             v-model="form.name"
-            placeholder="please enter your username..."
+            :placeholder="t('form.username.placeholder')"
           />
         </a-form-item>
-        <a-form-item field="post" label="Post">
-          <a-input v-model="form.post" placeholder="please enter your post..." />
+        <a-form-item field="post" :label="t('form.post.label')">
+          <a-input v-model="form.post" :placeholder="t('form.post.placeholder')" />
         </a-form-item>
         <a-form-item field="isRead">
           <a-checkbox v-model="form.isRead">
-            I have read the manual
+            {{ t('form.manual') }}
           </a-checkbox>
         </a-form-item>
         <a-form-item>
           <a-button html-type="submit">
-            Submit
+            {{ t('button.submit') }}
           </a-button>
         </a-form-item>
       </a-form>
-      <div border-t py5 text-lg font-semibold flex="~ justify-between items-center">
-        <span>
-          Request Body
+      <div border-t py5 flex="~ justify-between items-center">
+        <span text-lg font-semibold>
+          {{ t('txt.request-body') }}
         </span>
         <button i-ph-trash-duotone @click="submitted = []" />
       </div>
       <section flex="~ col" rounded bg-gray-100:75 p2 text-gray-500 leading-loose font-mono divide-y dark:bg-black hover:bg-op-100 dark:divide-dark>
         <div v-if="!submitted.length" font-semibold>
-          No Data
+          {{ t('txt.no-data') }}
         </div>
         <div v-for="item, key in submitted" :key>
           <span>

@@ -1,0 +1,14 @@
+form:
+  username:
+    label: 用户名
+    placeholder: 请输入您的用户名...
+    tooltip: 请输入用户名
+  post:
+    label: 发送
+    placeholder: 请输入您的帖子...
+  manual: 我已经阅读了手册。
+button:
+  submit: 提交
+txt:
+  request-body: 请求体
+  no-data: 无数据
