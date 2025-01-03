@@ -16,11 +16,11 @@ async function toggleLocales() {
 
 <template>
   <nav flex items-center justify-between text-center>
-    <div border rounded px2 py1>
+    <div border rounded px2 py1 dark:border-dark-1>
       <RouterLink :class="route.path === '/' ? 'op100' : 'op50'" to="/">
         Zod
       </RouterLink>
-      <span mx2 border />
+      <span mx2 border dark:border-dark-1 />
       <RouterLink :class="route.path === '/valibot' ? 'op100' : 'op50'" to="/valibot">
         Valibot
       </RouterLink>

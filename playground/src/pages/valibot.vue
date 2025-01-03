@@ -61,7 +61,7 @@ const onSubmit = handleSubmit((value) => {
       </a-button>
     </a-form-item>
   </a-form>
-  <div border-t py5 flex="~ justify-between items-center">
+  <div border-t py5 dark:border-dark-1 flex="~ justify-between items-center">
     <span text-lg font-semibold>
       {{ t('txt.request-body') }}
     </span>

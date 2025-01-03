@@ -4,7 +4,7 @@
       Zod Arco Rules Playground
     </header>
     <TheNav mxa w-150 />
-    <main mxa w-150 border rounded p10>
+    <main mxa w-150 border rounded p10 dark:border-dark-1>
       <RouterView />
     </main>
   </div>
