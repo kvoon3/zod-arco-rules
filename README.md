@@ -16,7 +16,8 @@ npm i zod-arco-rules
 
 ## Usage
 
-```ts
+```vue
+<script setup lang="ts">
 import * as z from 'zod'
 import { zodArcoRules } from 'zod-arco-rules'
 
@@ -25,9 +26,20 @@ const { rules, handleSubmit } = zodArcoRules(z.object({
   post: z.string().min(2).max(30),
   isRead: z.boolean(),
 }))
+
+const onSubmit = handleSubmit((values) => {
+  // Handle the validated values here
+})
+</script>
+
+<template>
+  <a-form :model="form" :rules @submit="onSubmit">
+    <!-- ... -->
+  </a-form>
+</template>
 ```
 
-- [📖 Check more](./playground/src/App.vue)
+- [📖 Check more](./playground/src/pages/index.vue)
 
 ## Todos
 
