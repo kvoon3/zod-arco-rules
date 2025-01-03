@@ -31,7 +31,7 @@ const { rules, handleSubmit } = zodArcoRules(z.object({
 
 ## Todos
 
-- [ ] Valibot support
+- [x] Valibot support
 - [ ] a-form validation status
 - [ ] Auto form
 

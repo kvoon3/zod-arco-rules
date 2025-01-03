@@ -1,4 +1,5 @@
 import i18next from 'i18next'
+import * as v from 'valibot'
 import { z } from 'zod'
 import { zodI18nMap } from 'zod-i18n-map'
 import en from 'zod-i18n-map/locales/en/zod.json'
@@ -18,6 +19,7 @@ z.setErrorMap(zodI18nMap)
 
 function setI18nLanguage(lang: keyof typeof resources) {
   i18next.changeLanguage(lang)
+  v.setGlobalConfig({ lang })
 }
 
 export {

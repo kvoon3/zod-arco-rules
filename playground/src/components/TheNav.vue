@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { RouterLink } from 'vue-router'
 import { availableLocales, loadLanguageAsync } from '~/i18n'
 
 const { locale } = useI18n()
+const route = useRoute()
 
 async function toggleLocales() {
   const locales = availableLocales
@@ -13,8 +15,20 @@ async function toggleLocales() {
 </script>
 
 <template>
-  <nav flex items-center justify-center gap8 text-center>
-    <button i-ph-translate-duotone icon-btn @click="toggleLocales()" />
-    <button i-ph-sun-dim-duotone dark="i-ph-moon-stars-duotone" icon-btn @click="() => toggleDark()" />
+  <nav flex items-center justify-between text-center>
+    <div border rounded px2 py1>
+      <RouterLink :class="route.path === '/' ? 'op100' : 'op50'" to="/">
+        Zod
+      </RouterLink>
+      <span mx2 border />
+      <RouterLink :class="route.path === '/valibot' ? 'op100' : 'op50'" to="/valibot">
+        Valibot
+      </RouterLink>
+    </div>
+
+    <div space-x-6>
+      <button i-ph-translate-duotone icon-btn @click="toggleLocales()" />
+      <button i-ph-sun-dim-duotone dark="i-ph-moon-stars-duotone" icon-btn @click="() => toggleDark()" />
+    </div>
   </nav>
 </template>
