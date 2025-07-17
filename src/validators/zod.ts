@@ -1,15 +1,9 @@
-import type { ZodObject, ZodType } from 'zod'
-import type { ArcoFormRules, ArcoHandleSubmitFunction, Options } from '../types'
+import type { ZodObject } from 'zod'
+import type { ArcoRules, Res } from '../types'
 import { checkFormRules } from '../utils'
 
-export function zodArcoRules<T extends Record<string, any>>(zodObject: ZodObject<Record<keyof T, ZodType>>): {
-  rules: ArcoFormRules<keyof T>
-  handleSubmit: (
-    handler: (values: Record<keyof T, any>) => void,
-    opts?: Options<T>,
-  ) => ArcoHandleSubmitFunction<keyof T>
-} {
-  const rules = {} as ArcoFormRules<keyof T>
+export function zodArcoRules(zodObject: ZodObject): Res {
+  const rules: ArcoRules = {}
 
   for (const key in zodObject.shape) {
     rules[key] = {
@@ -24,7 +18,7 @@ export function zodArcoRules<T extends Record<string, any>>(zodObject: ZodObject
 
   return {
     rules,
-    handleSubmit(handler, opts): ArcoHandleSubmitFunction<keyof T> {
+    handleSubmit(handler, opts) {
       const { onSuccess, onError } = opts || {}
 
       return ({ values }) => {

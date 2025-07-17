@@ -31,15 +31,24 @@ export interface ValidatedError {
   message: string
 }
 
-export type ObjectKey = string | number | symbol
+export type ArcoRuleFactory = (schemaObject: object) => Res
 
-export type ArcoFormRules<T extends ObjectKey> = Record<T, FieldRule>
-export type ArcoHandleSubmitFunction<T extends ObjectKey> = (arg: {
-  values: Record<T, any>
-  errors: Record<T, ValidatedError> | undefined
+export interface Res {
+  rules: ArcoRules
+  handleSubmit: (
+    handler: (values: object) => void,
+    options?: {
+      onSuccess?: (values: object) => void
+      onError?: (error: ArcoErrors) => void
+    },
+  ) => ArcoSubmitHandler
+}
+
+type ArcoSubmitHandler = (arg: {
+  values: object
+  errors: ArcoErrors | undefined
 }, ev: Event) => any
 
-export interface Options<T extends Record<ObjectKey, any> = Record<ObjectKey, any>> {
-  onSuccess?: (values: Record<keyof T, any>) => void
-  onError?: (error: Partial<Record<keyof T, string | string[]>>) => void
-}
+export type ArcoRules = Record<PropertyKey, FieldRule>
+
+export type ArcoErrors = Record<PropertyKey, ValidatedError>

@@ -1,21 +1,15 @@
 import type { ObjectSchema } from 'valibot'
-import type { ArcoFormRules, ArcoHandleSubmitFunction, Options } from '../types'
+import type { ArcoRules, Res } from '../types'
 import * as v from 'valibot'
 import { checkFormRules } from '../utils'
 
-export function valibotArcoRules<T extends Record<string, any> >(valibotObject: ObjectSchema<T, any>): {
-  rules: ArcoFormRules<keyof T>
-  handleSubmit: (
-    handler: (values: Record<keyof T, any>) => void,
-    opts?: Options<T>,
-  ) => ArcoHandleSubmitFunction<keyof T>
-} {
-  const rules = {} as ArcoFormRules<keyof T>
+export function valibotArcoRules(valibotObject: ObjectSchema<any, any>): Res {
+  const rules: ArcoRules = {}
 
   const entries = valibotObject.entries
 
   for (const key in entries) {
-    rules[key as keyof T] = {
+    rules[key] = {
       validator(value, callback) {
         const output = v.safeParse(entries[key], value)
         if (!output.success) {
@@ -27,7 +21,7 @@ export function valibotArcoRules<T extends Record<string, any> >(valibotObject: 
 
   return {
     rules,
-    handleSubmit(handler, opts): ArcoHandleSubmitFunction<keyof T> {
+    handleSubmit(handler, opts) {
       const { onSuccess, onError } = opts || {}
 
       return ({ values }) => {

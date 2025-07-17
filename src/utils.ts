@@ -1,4 +1,4 @@
-import type { ArcoFormRules, ObjectKey } from './types'
+import type { ArcoErrors, ArcoRules } from './types'
 
 export function toArray<T>(value: T | T[]): T[] {
   return Array.isArray(value)
@@ -6,21 +6,24 @@ export function toArray<T>(value: T | T[]): T[] {
     : [value]
 }
 
-export function checkFormRules<T extends ArcoFormRules<ObjectKey>>(
-  rules: T,
-  form: Record<keyof T, any>,
-): Partial<Record<keyof T, string | string[]>> {
-  const errors: Partial<Record<keyof T, string | string[]>> = {}
+export function checkFormRules(
+  rules: ArcoRules,
+  form: object,
+): ArcoErrors {
+  const errors: ArcoErrors = {}
 
   for (const key in rules) {
     toArray(rules[key]).forEach(({ validator }) => {
+      // @ts-expect-error type error
       validator?.(form[key], (error) => {
         if (!error)
           return
 
         if (!errors[key])
+          // @ts-expect-error type error
           errors[key] = error
         else
+          // @ts-expect-error type error
           errors[key] = [...toArray(errors[key]), error]
       })
     })
