@@ -1,8 +1,7 @@
 import type { ZodObject } from 'zod'
-import type { ArcoRules, Result } from '../types'
-import { checkFormRules } from '../test-utils'
+import type { ArcoRules } from '../types'
 
-export function zodArcoRules(zodObject: ZodObject): Result {
+export function genZodRules(zodObject: ZodObject): ArcoRules {
   const rules: ArcoRules = {}
 
   for (const key in zodObject.shape) {
@@ -16,21 +15,5 @@ export function zodArcoRules(zodObject: ZodObject): Result {
     }
   }
 
-  return {
-    rules,
-    handleSubmit(handler, opts) {
-      const { onSuccess, onError } = opts || {}
-
-      return ({ values }) => {
-        const errors = checkFormRules(rules, values)
-        if (Object.keys(errors).length) {
-          onError?.(errors)
-          return
-        }
-
-        handler(values)
-        onSuccess?.(values)
-      }
-    },
-  }
+  return rules
 }

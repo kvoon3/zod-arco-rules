@@ -1,16 +1,18 @@
 import type { FieldRule, ValidatedError } from './arco'
 
-// generaged by this lib
 export interface Result {
   rules: ArcoRules
-  handleSubmit: (
-    handler: (values: object) => void,
-    options?: {
-      onSuccess?: (values: object) => void
-      onError?: (error: Record<PropertyKey, string | string[]>) => void
-    },
-  ) => ArcoSubmitHandler
+  handleSubmit: HandleSubmit
 }
+
+export type HandleSubmit = (
+  handler: (values: object) => void,
+  options?: {
+    rules?: ArcoRules
+    onSuccess?: (values: object) => void
+    onError?: (error: Record<PropertyKey, string | string[]>) => void
+  },
+) => ArcoSubmitHandler
 
 type ArcoSubmitHandler = (arg: {
   values: object

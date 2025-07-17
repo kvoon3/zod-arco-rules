@@ -1,12 +1,11 @@
 import type { ObjectSchema } from 'valibot'
-import type { ArcoRules, Result } from '../types'
+import type { ArcoRules } from '../types'
 import * as v from 'valibot'
-import { checkFormRules } from '../test-utils'
 
-export function valibotArcoRules(valibotObject: ObjectSchema<any, any>): Result {
+export function genValibotRules(schema: ObjectSchema<any, any>): ArcoRules {
   const rules: ArcoRules = {}
 
-  const entries = valibotObject.entries
+  const entries = schema.entries
 
   for (const key in entries) {
     rules[key] = {
@@ -19,21 +18,5 @@ export function valibotArcoRules(valibotObject: ObjectSchema<any, any>): Result 
     }
   }
 
-  return {
-    rules,
-    handleSubmit(handler, opts) {
-      const { onSuccess, onError } = opts || {}
-
-      return ({ values }) => {
-        const errors = checkFormRules(rules, values)
-        if (Object.keys(errors).length) {
-          onError?.(errors)
-          return
-        }
-
-        handler(values)
-        onSuccess?.(values)
-      }
-    },
-  }
+  return rules
 }

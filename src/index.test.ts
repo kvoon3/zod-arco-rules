@@ -1,8 +1,9 @@
 import * as v from 'valibot'
 import { describe, expect, it } from 'vitest'
 import * as z from 'zod'
-import { valibotArcoRules, zodArcoRules } from '.'
 import { checkFormRules } from './test-utils'
+import { genValibotRules } from './validators/valibot'
+import { genZodRules } from './validators/zod'
 
 describe('form', () => {
   it('zod', () => {
@@ -12,7 +13,7 @@ describe('form', () => {
       email: z.string().email(),
     })
 
-    const { rules } = zodArcoRules(schema)
+    const rules = genZodRules(schema)
 
     const errors = checkFormRules(rules, {
       username: '',
@@ -35,7 +36,7 @@ describe('form', () => {
       email: v.pipe(v.string(), v.email()),
     })
 
-    const { rules } = valibotArcoRules(schema)
+    const rules = genValibotRules(schema)
 
     const errors = checkFormRules(rules, {
       username: '',
