@@ -1,8 +1,8 @@
-import type { ZodObject, ZodTypeAny } from 'zod'
+import type { ZodObject, ZodType } from 'zod'
 import type { ArcoFormRules, ArcoHandleSubmitFunction, Options } from '../types'
 import { checkFormRules } from '../utils'
 
-export function zodArcoRules<T extends Record<string, any>>(zodObject: ZodObject<Record<keyof T, ZodTypeAny>>): {
+export function zodArcoRules<T extends Record<string, any>>(zodObject: ZodObject<Record<keyof T, ZodType>>): {
   rules: ArcoFormRules<keyof T>
   handleSubmit: (
     handler: (values: Record<keyof T, any>) => void,
@@ -21,9 +21,6 @@ export function zodArcoRules<T extends Record<string, any>>(zodObject: ZodObject
       },
     }
   }
-
-  // TODO: report validation statuts
-  // const status = {} as Record<keyof T, Status>
 
   return {
     rules,
