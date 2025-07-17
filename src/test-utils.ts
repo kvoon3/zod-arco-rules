@@ -1,11 +1,11 @@
-import type { ArcoErrors, ArcoRules } from './types'
+import type { ArcoRules } from './types'
 import { toArray } from '@antfu/utils'
 
 export function checkFormRules(
   rules: ArcoRules,
   form: object,
-): ArcoErrors {
-  const errors: ArcoErrors = {}
+): Record<string, string> {
+  const errors: Record<string, string> = {}
 
   for (const key in rules) {
     toArray(rules[key]).forEach(({ validator }) => {
@@ -14,12 +14,7 @@ export function checkFormRules(
         if (!error)
           return
 
-        if (!errors[key])
-          // @ts-expect-error type error
-          errors[key] = error
-        else
-          // @ts-expect-error type error
-          errors[key] = [...toArray(errors[key]), error]
+        errors[key] = error
       })
     })
   }

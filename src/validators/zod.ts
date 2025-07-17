@@ -1,8 +1,8 @@
 import type { ZodObject } from 'zod'
-import type { ArcoRules, Res } from '../types'
+import type { ArcoRules, Result } from '../types'
 import { checkFormRules } from '../test-utils'
 
-export function zodArcoRules(zodObject: ZodObject): Res {
+export function zodArcoRules(zodObject: ZodObject): Result {
   const rules: ArcoRules = {}
 
   for (const key in zodObject.shape) {
