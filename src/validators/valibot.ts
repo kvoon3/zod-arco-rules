@@ -1,7 +1,7 @@
 import type { ObjectSchema } from 'valibot'
 import type { ArcoRules, Res } from '../types'
 import * as v from 'valibot'
-import { checkFormRules } from '../utils'
+import { checkFormRules } from '../test-utils'
 
 export function valibotArcoRules(valibotObject: ObjectSchema<any, any>): Res {
   const rules: ArcoRules = {}

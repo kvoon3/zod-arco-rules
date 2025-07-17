@@ -1,10 +1,5 @@
 import type { ArcoErrors, ArcoRules } from './types'
-
-export function toArray<T>(value: T | T[]): T[] {
-  return Array.isArray(value)
-    ? value
-    : [value]
-}
+import { toArray } from '@antfu/utils'
 
 export function checkFormRules(
   rules: ArcoRules,

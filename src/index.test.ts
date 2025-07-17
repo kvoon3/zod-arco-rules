@@ -1,8 +1,8 @@
 import * as v from 'valibot'
 import { describe, expect, it } from 'vitest'
 import * as z from 'zod'
-import { valibotArcoRules, zodArcoRules } from '../src'
-import { checkFormRules } from '../src/utils'
+import { valibotArcoRules, zodArcoRules } from '.'
+import { checkFormRules } from './test-utils'
 
 describe('form', () => {
   it('zod', () => {
