@@ -20,10 +20,12 @@ describe('form', () => {
       email: 'foo@bar.com',
     })
 
-    expect(errors).toEqual({
-      username: 'String must contain at least 1 character(s)',
-      password: 'Expected string, received number',
-    })
+    expect(errors).toMatchInlineSnapshot(`
+      {
+        "password": "Invalid input: expected string, received number",
+        "username": "Too small: expected string to have >=1 characters",
+      }
+    `)
   })
 
   it('valibot', () => {
@@ -41,9 +43,11 @@ describe('form', () => {
       email: 'foo@bar.com',
     })
 
-    expect(errors).toEqual({
-      username: 'Invalid length: Expected !0 but received 0',
-      password: 'Invalid type: Expected string but received 12345678',
-    })
+    expect(errors).toMatchInlineSnapshot(`
+      {
+        "password": "Invalid type: Expected string but received 12345678",
+        "username": "Invalid length: Expected !0 but received 0",
+      }
+    `)
   })
 })
