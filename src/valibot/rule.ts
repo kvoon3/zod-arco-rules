@@ -1,10 +1,8 @@
-import type { BaseIssue, BaseSchema, InferIssue, ObjectSchema } from 'valibot'
 import type { ArcoRules } from '../types'
+import type { AnyObjectSchema, ValibotConfig } from './types'
 import * as v from 'valibot'
 
-type Config = v.Config<InferIssue<BaseSchema<unknown, unknown, BaseIssue<unknown>>>>
-
-export function genValibotRules(schema: ObjectSchema<any, any>, config?: Config): ArcoRules {
+export function genValibotRules(schema: AnyObjectSchema, config?: ValibotConfig): ArcoRules {
   const rules: ArcoRules = {}
 
   const entries = schema.entries

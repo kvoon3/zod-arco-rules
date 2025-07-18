@@ -48,6 +48,9 @@
     "play": "pnpm -r dev",
     "up": "npx taze -I major"
   },
+  "peerDependencies": {
+    "vue": "^3.5.17"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^4.17.0",
     "@antfu/ni": "^25.0.0",
@@ -57,6 +60,7 @@
     "bumpp": "^10.2.0",
     "eslint": "^9.31.0",
     "lint-staged": "^16.1.2",
+    "lodash-es": "^4.17.21",
     "pnpm": "^10.13.1",
     "simple-git-hooks": "^2.13.0",
     "tsdown": "^0.12.9",
