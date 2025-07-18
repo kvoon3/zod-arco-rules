@@ -81,8 +81,6 @@ const onSubmit = handleSubmit((values) => {
 </template>
 ```
 
-- [📖 Check more](./playground/src/pages/index.vue)
-
 ## Todos
 
 - [x] Valibot support
