@@ -6,7 +6,7 @@ import type { AnyObjectSchema } from '../types/valibot'
 import * as v from 'valibot'
 import { ref, watch } from 'vue'
 import { handleSubmit } from '../utils'
-import { genRules } from './rule'
+import { arcoRules } from './rule'
 
 export interface UseFormOptions extends Config<any> {
   watch?: MultiWatchSources
@@ -22,7 +22,7 @@ export function useForm<T extends AnyObjectSchema = AnyObjectSchema>(
 
   const form = ref<v.InferInput<T>>(v.getDefaults(schema))
 
-  const rules = genRules(schema, options)
+  const rules = arcoRules(schema, options)
 
   const reset = (): void => {
     form.value = v.getDefaults(schema)

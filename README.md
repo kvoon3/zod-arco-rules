@@ -19,9 +19,48 @@ npm i zod-arco-rules
 ```vue
 <script setup lang="ts">
 import * as z from 'zod'
-import { zodArcoRules } from 'zod-arco-rules'
+// zod
+import { arcoRules, handleSubmit } from 'zod-arco-rules'
+// valibot
+// import { arcoRules, handleSubmit } from 'zod-arco-rules/valibot'
 
-const { rules, handleSubmit } = zodArcoRules(z.object({
+const rules = arcoRules(z.object({
+  name: z.string().nonempty(),
+  post: z.string().min(2).max(30),
+  isRead: z.boolean(),
+}))
+
+const form = ref({
+  name: '',
+  post: '',
+  isRead: false
+})
+
+const onSubmit = handleSubmit((values) => {
+  // Handle the validated values here
+}, { rules })
+</script>
+
+<template>
+  <a-form :model="form" :rules @submit="onSubmit">
+    <!-- ... -->
+  </a-form>
+</template>
+```
+
+### With Composition Api
+
+useForm
+
+```vue
+<script setup lang="ts">
+import * as z from 'zod'
+// zod
+import { useForm } from 'zod-arco-rules'
+// valibot
+// import { useForm } from 'zod-arco-rules/valibot'
+
+const { rules, form, handleSubmit } = useForm(z.object({
   name: z.string().nonempty(),
   post: z.string().min(2).max(30),
   isRead: z.boolean(),
@@ -44,8 +83,7 @@ const onSubmit = handleSubmit((values) => {
 ## Todos
 
 - [x] Valibot support
-- [ ] a-form validation status
-- [ ] Auto form
+- [x] useForm
 
 ## License
 

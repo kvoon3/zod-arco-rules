@@ -1,17 +1,17 @@
 import * as v from 'valibot'
 import { describe, expect, it } from 'vitest'
 import { checkFormRules } from '../utils'
-import { genRules } from './rule'
+import { arcoRules } from './rule'
 
-describe('form', () => {
-  it('valibot', () => {
+describe('rule', () => {
+  it('check', () => {
     const schema = v.object({
       username: v.pipe(v.string(), v.nonEmpty()),
       password: v.pipe(v.string(), v.nonEmpty()),
       email: v.pipe(v.string(), v.email()),
     })
 
-    const rules = genRules(schema)
+    const rules = arcoRules(schema)
 
     const errors = checkFormRules(rules, {
       username: '',

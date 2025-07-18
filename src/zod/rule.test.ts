@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import * as z from 'zod'
 import { checkFormRules } from '../utils'
-import { genRules } from './rule'
+import { arcoRules } from './rule'
 
 describe('form', () => {
   it('zod', () => {
@@ -11,7 +11,7 @@ describe('form', () => {
       email: z.string().email(),
     })
 
-    const rules = genRules(schema)
+    const rules = arcoRules(schema)
 
     const errors = checkFormRules(rules, {
       username: '',

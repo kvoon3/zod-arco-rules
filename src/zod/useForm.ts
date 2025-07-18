@@ -6,7 +6,7 @@ import type { UseFormResult } from '../types/useForm'
 import { ref, watch } from 'vue'
 import { handleSubmit } from '../utils'
 import { getDefaults } from './defaults'
-import { genRules } from './rule'
+import { arcoRules } from './rule'
 
 interface UseFormOptions {
   watch?: MultiWatchSources
@@ -22,7 +22,7 @@ export function useForm<T extends ZodObject = ZodObject>(
 
   const form = ref<z.infer<T>>(getDefaults(schema))
 
-  const rules = genRules(schema)
+  const rules = arcoRules(schema)
 
   const reset = (): void => {
     form.value = getDefaults(schema)
