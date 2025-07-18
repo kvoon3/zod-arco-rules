@@ -1,8 +1,8 @@
 import type { ArcoRules } from '../types'
-import type { AnyObjectSchema, ValibotConfig } from './types'
+import type { AnyObjectSchema } from '../types/valibot'
 import * as v from 'valibot'
 
-export function genValibotRules(schema: AnyObjectSchema, config?: ValibotConfig): ArcoRules {
+export function genRules(schema: AnyObjectSchema, config?: { lang?: string }): ArcoRules {
   const rules: ArcoRules = {}
 
   const entries = schema.entries

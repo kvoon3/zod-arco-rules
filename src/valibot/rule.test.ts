@@ -1,7 +1,7 @@
 import * as v from 'valibot'
 import { describe, expect, it } from 'vitest'
 import { checkFormRules } from '../utils'
-import { genValibotRules } from './rule'
+import { genRules } from './rule'
 
 describe('form', () => {
   it('valibot', () => {
@@ -11,7 +11,7 @@ describe('form', () => {
       email: v.pipe(v.string(), v.email()),
     })
 
-    const rules = genValibotRules(schema)
+    const rules = genRules(schema)
 
     const errors = checkFormRules(rules, {
       username: '',

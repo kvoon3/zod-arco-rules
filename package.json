@@ -19,6 +19,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./valibot": {
+      "types": "./dist/valibot/index.d.ts",
+      "import": "./dist/valibot/index.js"
     }
   },
   "main": "./dist/index.js",

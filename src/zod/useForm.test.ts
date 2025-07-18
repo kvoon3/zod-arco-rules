@@ -1,16 +1,18 @@
-import * as v from 'valibot'
 import { describe, expect, it } from 'vitest'
 import { ref, toValue } from 'vue'
+import { z } from 'zod'
 import { checkFormRules } from '../utils'
 import { useForm } from './useForm'
 
 describe('useForm', () => {
   it('optional', () => {
-    const { form, rules } = useForm(v.object({
-      name: v.optional(v.string(), 'kwongliegaai'),
-      age: v.optional(v.number(), 18),
-      sex: v.number(),
-    }))
+    const { form, rules } = useForm(
+      z.object({
+        name: z.string().optional().default('kwongliegaai'),
+        age: z.number().optional().default(18),
+        sex: z.number(),
+      }),
+    )
 
     expect(toValue(form)).toMatchInlineSnapshot(`
       {
@@ -22,7 +24,7 @@ describe('useForm', () => {
 
     expect(checkFormRules(rules, toValue(form))).toMatchInlineSnapshot(`
       {
-        "sex": "Invalid type: Expected number but received undefined",
+        "sex": "Invalid input: expected number, received undefined",
       }
     `)
 
@@ -36,10 +38,12 @@ describe('useForm', () => {
       age: 18,
     })
 
-    const { form, reset } = useForm(v.object({
-      name: v.optional(v.string(), () => userInfo.value.name),
-      age: v.optional(v.number(), () => userInfo.value.age),
-    }))
+    const { form, reset } = useForm(
+      z.object({
+        name: z.string().optional().default(() => userInfo.value.name),
+        age: z.number().optional().default(() => userInfo.value.age),
+      }),
+    )
 
     expect(toValue(form)).toEqual({
       age: 18,

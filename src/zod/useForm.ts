@@ -1,31 +1,31 @@
-import type { Config } from 'valibot'
 import type { MultiWatchSources, Ref } from 'vue'
+import type { ZodObject } from 'zod'
+import type * as z from 'zod'
 import type { HandleSubmit } from '../types'
 import type { UseFormResult } from '../types/useForm'
-import type { AnyObjectSchema } from '../types/valibot'
-import * as v from 'valibot'
 import { ref, watch } from 'vue'
 import { handleSubmit } from '../utils'
+import { getDefaults } from './defaults'
 import { genRules } from './rule'
 
-export interface UseFormOptions extends Config<any> {
+interface UseFormOptions {
   watch?: MultiWatchSources
 }
 
-export function useForm<T extends AnyObjectSchema = AnyObjectSchema>(
+export function useForm<T extends ZodObject = ZodObject>(
   schema: T,
   options?: UseFormOptions,
-): UseFormResult<v.InferInput<T>> {
+): UseFormResult<z.infer<T>> {
   const {
     watch: watchList = [],
   } = options || {}
 
-  const form = ref<v.InferInput<T>>(v.getDefaults(schema))
+  const form = ref<z.infer<T>>(getDefaults(schema))
 
-  const rules = genRules(schema, options)
+  const rules = genRules(schema)
 
   const reset = (): void => {
-    form.value = v.getDefaults(schema)
+    form.value = getDefaults(schema)
   }
 
   const _handleSubmit: HandleSubmit = (handler, options) => {
@@ -40,7 +40,7 @@ export function useForm<T extends AnyObjectSchema = AnyObjectSchema>(
   return {
     rules,
     // TODO: improve type
-    form: form as Ref<v.InferInput<T>>,
+    form: form as Ref<z.infer<T>>,
     reset,
     handleSubmit: _handleSubmit,
   }

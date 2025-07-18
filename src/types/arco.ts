@@ -1,4 +1,7 @@
-// @arco-design/web-vue type vender
+/**
+ * vender: @arco-design/web-vue
+ */
+
 export interface FieldRule<FieldValue = any> {
   type?: 'string' | 'number' | 'boolean' | 'array' | 'object' | 'email' | 'url' | 'ip'
   required?: boolean
@@ -22,6 +25,7 @@ export interface FieldRule<FieldValue = any> {
   hasKeys?: string[]
   validator?: (value: FieldValue | undefined, callback: (error?: string) => void) => void
 }
+
 export interface ValidatedError {
   label: string
   field: string

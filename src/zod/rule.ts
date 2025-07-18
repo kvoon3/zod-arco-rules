@@ -1,7 +1,7 @@
 import type { ZodObject } from 'zod'
 import type { ArcoRules } from '../types'
 
-export function genZodRules(zodObject: ZodObject): ArcoRules {
+export function genRules(zodObject: ZodObject): ArcoRules {
   const rules: ArcoRules = {}
 
   for (const key in zodObject.shape) {
