@@ -1,5 +1,20 @@
-import type { ArcoRules } from './types'
+import type { ArcoRules, HandleSubmit } from './types'
 import { toArray } from '@antfu/utils'
+
+export const handleSubmit: HandleSubmit = (handler, { rules, onSuccess, onError } = {}) => {
+  return ({ values }) => {
+    if (rules) {
+      const errors = checkFormRules(rules, values)
+      if (Object.keys(errors).length) {
+        onError?.(errors)
+        return
+      }
+    }
+
+    handler(values)
+    onSuccess?.(values)
+  }
+}
 
 export function checkFormRules(
   rules: ArcoRules,

@@ -1,7 +1,7 @@
 import * as v from 'valibot'
 import { describe, expect, it } from 'vitest'
 import * as z from 'zod'
-import { checkFormRules } from './test-utils'
+import { checkFormRules } from './utils'
 import { genValibotRules } from './validators/valibot'
 import { genZodRules } from './validators/zod'
 
