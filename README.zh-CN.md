@@ -6,23 +6,21 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-[中文](./README.zh-CN.md)
+将 Zod 或 Valibot schema 转换成 Arco Design Vue 表单校验规则 - 写一次 schema，同时得到「类型安全 + 表单校验」
 
-Zod / Valibot schemas ➜ Arco Design rules in one line.
-
-## Install
+## 安装
 
 ```sh
-# use zod
+# 使用 Zod
 npm i zod zod-arco-rules
 
-# or use valibot
+# 使用 Valibot
 npm i valibot zod-arco-rules
 ```
 
-## Quick Start
+## 快速上手
 
-### Composition Api (Recommend)
+### 组合式 api (推荐)
 
 ```vue
 <script setup lang="ts">
@@ -31,9 +29,9 @@ import { useForm } from 'zod-arco-rules'
 // import { useForm } from 'zod-arco-rules/valibot'
 
 const { rules, form, handleSubmit, reset } = useForm(z.object({
-  name: z.string().nonempty(),
+  name: z.string().nonempty().default('Kevin'),
   post: z.string().min(2).max(30),
-  isRead: z.boolean(),
+  isRead: z.boolean().default(false),
 }))
 
 const onSubmit = handleSubmit((values) => {
@@ -49,7 +47,7 @@ const onSubmit = handleSubmit((values) => {
 </template>
 ```
 
-### Manually Usage
+### 手动用法（已有表单数据时）
 
 ```vue
 <script setup lang="ts">
