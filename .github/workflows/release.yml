@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    uses: kvoon3/workflows/.github/workflows/release.yml@main
+    uses: kvoon3/workflows/.github/workflows/pnpm-release.yml@main
     with:
       publish: true
       build: pnpm build
